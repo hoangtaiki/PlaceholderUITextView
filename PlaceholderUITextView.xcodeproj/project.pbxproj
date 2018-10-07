@@ -10,6 +10,7 @@
 		4DF034C32164C36500742866 /* PlaceholderUITextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DF034B92164C36500742866 /* PlaceholderUITextView.framework */; };
 		4DF034DB2164C71F00742866 /* PlaceholderUITextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DF034D72164C71F00742866 /* PlaceholderUITextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4DF034DE2164C8A500742866 /* PlaceholderUITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF034DD2164C8A500742866 /* PlaceholderUITextView.swift */; };
+		4DF2AEE2216A844600B6D355 /* PlaceholderUITextViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF034D42164C71F00742866 /* PlaceholderUITextViewTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,10 +27,10 @@
 		4DF034B92164C36500742866 /* PlaceholderUITextView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PlaceholderUITextView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DF034C22164C36500742866 /* PlaceholderUITextViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaceholderUITextViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DF034D42164C71F00742866 /* PlaceholderUITextViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderUITextViewTests.swift; sourceTree = "<group>"; };
-		4DF034D52164C71F00742866 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DF034D72164C71F00742866 /* PlaceholderUITextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceholderUITextView.h; sourceTree = "<group>"; };
-		4DF034D82164C71F00742866 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DF034DD2164C8A500742866 /* PlaceholderUITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderUITextView.swift; sourceTree = "<group>"; };
+		4DF2AEDE216A7EA200B6D355 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DF2AEE0216A7EA900B6D355 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,8 +73,8 @@
 		4DF034D32164C71F00742866 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				4DF2AEE0216A7EA900B6D355 /* Info.plist */,
 				4DF034D42164C71F00742866 /* PlaceholderUITextViewTests.swift */,
-				4DF034D52164C71F00742866 /* Info.plist */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -81,8 +82,8 @@
 		4DF034D62164C71F00742866 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				4DF2AEDE216A7EA200B6D355 /* Info.plist */,
 				4DF034D72164C71F00742866 /* PlaceholderUITextView.h */,
-				4DF034D82164C71F00742866 /* Info.plist */,
 				4DF034DD2164C8A500742866 /* PlaceholderUITextView.swift */,
 			);
 			path = Source;
@@ -205,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DF2AEE2216A844600B6D355 /* PlaceholderUITextViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,13 +348,13 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6ZVUJ9G9RV;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -361,6 +363,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hoangtaiki.PlaceholderUITextView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -373,13 +376,13 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6ZVUJ9G9RV;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -388,6 +391,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hoangtaiki.PlaceholderUITextView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -398,9 +402,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6ZVUJ9G9RV;
-				INFOPLIST_FILE = PlaceholderUITextViewTests/Info.plist;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -408,6 +412,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hoangtaiki.PlaceholderUITextViewTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -417,9 +422,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6ZVUJ9G9RV;
-				INFOPLIST_FILE = PlaceholderUITextViewTests/Info.plist;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -427,6 +432,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hoangtaiki.PlaceholderUITextViewTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
