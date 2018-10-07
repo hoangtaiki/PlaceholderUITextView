@@ -4,7 +4,7 @@
 )](https://developer.apple.com/iphone/index.action)
 [![Language](http://img.shields.io/badge/language-swift-brightgreen.svg?style=flat
 )](https://developer.apple.com/swift)
-[![CI Status](https://img.shields.io/travis/Hoangtaiki/PlaceholderUITextView.svg?style=flat)](https://travis-ci.org/Hoangtaiki/PlaceholderUITextView)
+[![CI Status](https://img.shields.io/travis/hoangtaiki/PlaceholderUITextView.svg?style=flat)](https://travis-ci.org/hoangtaiki/PlaceholderUITextView)
 [![Version](https://img.shields.io/cocoapods/v/PlaceholderUITextView.svg?style=flat)](https://cocoapods.org/pods/PlaceholderUITextView)
 [![License](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat
 )](http://mit-license.org)
