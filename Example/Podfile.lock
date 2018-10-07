@@ -1,0 +1,16 @@
+PODS:
+  - PlaceholderUITextView (0.1.0)
+
+DEPENDENCIES:
+  - PlaceholderUITextView (from `../`)
+
+EXTERNAL SOURCES:
+  PlaceholderUITextView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  PlaceholderUITextView: e933e4fd33c341e0189244e45322eb82bb978fb3
+
+PODFILE CHECKSUM: a6fdc1e79481d2e478ad3375f7ccb5e19b9ad25f
+
+COCOAPODS: 1.5.3

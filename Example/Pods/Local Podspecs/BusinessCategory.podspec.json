@@ -1,0 +1,44 @@
+{
+  "name": "BusinessCategory",
+  "version": "0.0.1",
+  "license": "MIT",
+  "summary": "BusinessCategory",
+  "homepage": "https://bitbucket.org/hoangtaiki/BusinessCategory",
+  "authors": {
+    "Hoangtaiki": "duchoang.vp@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/hoangtaiki/BusinessCategory.git",
+    "tag": "0.0.1"
+  },
+  "requires_arc": true,
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "Source/**/*.swift",
+  "resource_bundles": {
+    "BusinessCategory": [
+      "Source/Resources/**/*.{png,xcassets,xib,json}"
+    ]
+  },
+  "ios": {
+    "frameworks": [
+      "UIKit",
+      "Foundation"
+    ]
+  },
+  "dependencies": {
+    "RxSwift": [
+
+    ],
+    "RxCocoa": [
+
+    ],
+    "SwiftyJSON": [
+
+    ],
+    "ObjectMapper": [
+
+    ]
+  }
+}
