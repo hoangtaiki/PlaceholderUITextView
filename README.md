@@ -23,7 +23,7 @@
 Install with [CocoaPods](http://cocoapods.org) by adding the following to your `Podfile`:
 
 ```
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 pod 'Refreshable'
 ```
