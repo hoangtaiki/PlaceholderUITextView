@@ -25,7 +25,7 @@ Install with [CocoaPods](http://cocoapods.org) by adding the following to your `
 ```
 platform :ios, '10.0'
 use_frameworks!
-pod 'Refreshable'
+pod 'PlaceholderUITextView'
 ```
 
 ### Swift Package Manager
@@ -34,7 +34,7 @@ Install with [Swift Package Manager](https://github.com/apple/swift-package-mana
 
 ```swift
 dependencies: [
-.package(url: "https://github.com/hoangtaiki/Refreshable", from: "1.0.0"),
+.package(url: "https://github.com/hoangtaiki/PlaceholderUITextView", from: "1.0.0"),
 ],
 ```
 
