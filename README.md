@@ -8,6 +8,8 @@
 [![Version](https://img.shields.io/cocoapods/v/PlaceholderUITextView.svg?style=flat)](https://cocoapods.org/pods/PlaceholderUITextView)
 [![License](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat
 )](http://mit-license.org)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 
 `PlaceholderUITextView` is a simple subclass from UITextView with multiple line placeholder
 
@@ -28,19 +30,39 @@ use_frameworks!
 pod 'PlaceholderUITextView'
 ```
 
+### Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
+
+You can install Carthage with [Homebrew](https://brew.sh/) using the following command:
+
+```bash
+$ brew update
+$ brew install carthage
+```
+
+To integrate PlaceholderUITextView into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "hoangtaiki/PlaceholderUITextView" ~> 1.1
+```
+
+Run `carthage update` to build the framework and drag the built `PlaceholderUITextView.framework` into your Xcode project.
+
+
 ### Swift Package Manager
 
 Install with [Swift Package Manager](https://github.com/apple/swift-package-manager) by adding the following to your `Package.swift`:
 
 ```swift
 dependencies: [
-.package(url: "https://github.com/hoangtaiki/PlaceholderUITextView", from: "1.0.0"),
+.package(url: "https://github.com/hoangtaiki/PlaceholderUITextView", from: "1.1.0"),
 ],
 ```
 
 ### Submodules
 
-Or manually checkout the submodule with `git submodule add git@github.com:hoangtaiki/Refreshable.git`, drag Refreshable.xcodeproj to your project, and add Refreshable as a build dependency.
+Or manually checkout the submodule with `git submodule add git@github.com:hoangtaiki/PlaceholderUITextView.git`, drag PlaceholderUITextView.xcodeproj to your project, and add PlaceholderUITextView as a build dependency.
 
 
 ## Usage
