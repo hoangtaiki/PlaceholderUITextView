@@ -1,8 +1,8 @@
 //
-//  SummaryViewController.swift
+//  HomeViewController.swift
 //  iOS Example
 //
-//  Created by Hoangtaiki on 10/4/18.
+//  Created by Hoangtaiki on 12/5/18.
 //  Copyright © 2018 Hoangtaiki. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import PlaceholderUITextView
 
 class HomeViewController: UITableViewController {
-
+    
     @IBOutlet weak var attributedPlaceholderTextView: PlaceholderUITextView!
     @IBOutlet weak var noneInsetsLinePaddingTextView: PlaceholderUITextView!
     
@@ -20,7 +20,7 @@ class HomeViewController: UITableViewController {
         title = "Placeholder TextView"
         setupTextViews()
     }
-
+    
     private func setupTextViews() {
         noneInsetsLinePaddingTextView.textContainerInset = UIEdgeInsets.zero
         noneInsetsLinePaddingTextView.textContainerLineFragmentPadding = 0

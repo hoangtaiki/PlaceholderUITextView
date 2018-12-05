@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  iOS Example
 //
-//  Created by Hoangtaiki on 7/20/18.
+//  Created by Hoangtaiki on 12/5/18.
 //  Copyright © 2018 Hoangtaiki. All rights reserved.
 //
 
@@ -13,17 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
-        let appearance = UINavigationBar.appearance()
-        appearance.barStyle = .black
-        appearance.isTranslucent = false
-        appearance.tintColor = .white
-        appearance.barTintColor = UIColor(red: 3/255, green: 155/255, blue: 229/255, alpha: 1)
-        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white,
-                                          NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.medium)  ]
-
         return true
     }
 
