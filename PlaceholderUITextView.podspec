@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'PlaceholderUITextView'
-  s.version          = '1.1.0'
+  s.version          = '1.2.0'
   s.summary          = 'A missing placeholder for UITextView.'
 
   s.homepage         = 'https://github.com/Hoangtaiki/PlaceholderUITextView'
@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Source/**/*.{swift,h}'
   s.ios.frameworks = 'UIKit', 'Foundation'
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
 end
