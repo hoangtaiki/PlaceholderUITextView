@@ -14,6 +14,7 @@
 		4DFEB70B21B7EE9700A3E66D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DFEB70921B7EE9700A3E66D /* LaunchScreen.storyboard */; };
 		4DFEB71621B7EE9700A3E66D /* iOS_ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFEB71521B7EE9700A3E66D /* iOS_ExampleTests.swift */; };
 		4DFEB72121B7EE9700A3E66D /* iOS_ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFEB72021B7EE9700A3E66D /* iOS_ExampleUITests.swift */; };
+		9946CE1E225E616C00E685F9 /* PlaceholderUITextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DFEB73521B7F03100A3E66D /* PlaceholderUITextView.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9946CE1E225E616C00E685F9 /* PlaceholderUITextView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +99,7 @@
 				4DFEB71421B7EE9700A3E66D /* iOS ExampleTests */,
 				4DFEB71F21B7EE9700A3E66D /* iOS ExampleUITests */,
 				4DFEB6FE21B7EE9600A3E66D /* Products */,
+				9946CE1D225E616C00E685F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,6 +151,13 @@
 				4DFEB73721B7F03100A3E66D /* PlaceholderUITextViewTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9946CE1D225E616C00E685F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,10 +231,12 @@
 					};
 					4DFEB71021B7EE9700A3E66D = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 4DFEB6FC21B7EE9600A3E66D;
 					};
 					4DFEB71B21B7EE9700A3E66D = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 4DFEB6FC21B7EE9600A3E66D;
 					};
 				};
@@ -491,7 +503,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.platphorm.iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -511,7 +523,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.platphorm.iOS-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -531,7 +543,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.platphorm.iOS-ExampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS Example.app/iOS Example";
 			};
@@ -552,7 +564,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.platphorm.iOS-ExampleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS Example.app/iOS Example";
 			};
@@ -572,7 +584,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.platphorm.iOS-ExampleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "iOS Example";
 			};
@@ -592,7 +604,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.platphorm.iOS-ExampleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "iOS Example";
 			};
