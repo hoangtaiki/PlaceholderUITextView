@@ -44,7 +44,7 @@ $ brew install carthage
 To integrate PlaceholderUITextView into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "hoangtaiki/PlaceholderUITextView" ~> 1.1
+github "hoangtaiki/PlaceholderUITextView" ~> 1.2
 ```
 
 Run `carthage update` to build the framework and drag the built `PlaceholderUITextView.framework` into your Xcode project.
@@ -56,7 +56,7 @@ Install with [Swift Package Manager](https://github.com/apple/swift-package-mana
 
 ```swift
 dependencies: [
-.package(url: "https://github.com/hoangtaiki/PlaceholderUITextView", from: "1.1.0"),
+    .package(url: "https://github.com/hoangtaiki/PlaceholderUITextView", from: "1.1.0"),
 ],
 ```
 
