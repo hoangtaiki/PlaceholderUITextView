@@ -56,7 +56,7 @@ Install with [Swift Package Manager](https://github.com/apple/swift-package-mana
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/hoangtaiki/PlaceholderUITextView", from: "1.1.0"),
+    package(url: "https://github.com/sabarics/PlaceholderUITextView.git", .branch("master")),
 ],
 ```
 

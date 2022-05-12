@@ -1,13 +1,16 @@
-//
-//  Package.swift
-//  PlaceholderUITextView
-//
-//  Created by Hoangtaiki on 10/7/18.
-//  Copyright © 2018 Hoangtaiki. All rights reserved.
-//
+
+// swift-tools-version:4.2
 
 import PackageDescription
 
 let package = Package(
-    name: "PlaceholderUITextView"
+        name: "PlaceholderUITextView",
+        products: [
+            .library(name: "PlaceholderUITextView", targets: ["PlaceholderUITextView"])
+        ],
+        dependencies: [
+        ],
+        targets: [
+            .target(name: "PlaceholderUITextView",path: "Source"),
+        ]
 )
