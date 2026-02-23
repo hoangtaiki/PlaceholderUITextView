@@ -3,7 +3,7 @@
 [![Platform](https://img.shields.io/badge/platform-ios-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![Language](https://img.shields.io/badge/language-swift-brightgreen.svg?style=flat)](https://developer.apple.com/swift)
 [![Swift Version](https://img.shields.io/badge/swift-5.0+-orange.svg?style=flat)](https://swift.org)
-[![iOS Version](https://img.shields.io/badge/iOS-16.0+-blue.svg?style=flat)](https://developer.apple.com/ios/)
+[![iOS Version](https://img.shields.io/badge/iOS-15.0+-blue.svg?style=flat)](https://developer.apple.com/ios/)
 [![CI Status](https://github.com/hoangtaiki/PlaceholderUITextView/workflows/CI/badge.svg)](https://github.com/hoangtaiki/PlaceholderUITextView/actions)
 [![Version](https://img.shields.io/cocoapods/v/PlaceholderUITextView.svg?style=flat)](https://cocoapods.org/pods/PlaceholderUITextView)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)
