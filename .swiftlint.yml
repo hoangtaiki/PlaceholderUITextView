@@ -119,43 +119,6 @@ nesting:
   type_level:
     warning: 3
     error: 6
-  statement_level:
-    warning: 5
-    error: 10
-
-# Custom rules
-custom_rules:
-  # Ensure proper spacing around operators
-  spaces_around_operators:
-    name: "Spaces Around Operators"
-    regex: '[a-zA-Z0-9]\+[a-zA-Z0-9]'
-    match_kinds:
-      - argument
-      - attribute.builtin
-      - attribute.name
-      - buildconfig.id
-      - buildconfig.keyword
-      - identifier
-      - keyword
-      - number
-      - objectliteral
-      - parameter
-      - placeholder
-      - string
-      - string_interpolation_anchor
-      - typeidentifier
-    message: "Operators should be surrounded by spaces"
-    severity: warning
-
-  # Discourage force unwrapping
-  force_unwrapping:
-    name: "Force Unwrapping"
-    regex: '!\s*(?:[^=\n]|$)'
-    match_kinds:
-      - identifier
-      - keyword
-    message: "Avoid force unwrapping. Use optional binding or nil coalescing instead."
-    severity: warning
 
 # Reporter type
 reporter: "xcode"

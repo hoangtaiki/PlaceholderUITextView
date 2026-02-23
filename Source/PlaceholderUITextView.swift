@@ -1,3 +1,4 @@
+// swiftlint:disable valid_ibinspectable
 //
 //  PlaceholderUITextView.swift
 //  PlaceholderUITextView
@@ -8,25 +9,6 @@
 
 import UIKit
 
-/// A UITextView subclass that provides built-in placeholder functionality.
-///
-/// `PlaceholderUITextView` displays a placeholder text when the text view is empty,
-/// similar to UITextField's placeholder behavior. The placeholder automatically
-/// shows/hides as the user types, with smooth animations and full accessibility support.
-///
-/// ## Usage
-///
-/// ```swift
-/// let textView = PlaceholderUITextView()
-/// textView.placeholder = "Enter your message here..."
-/// textView.placeholderTextColor = .systemGray
-/// ```
-///
-/// ## Accessibility
-///
-/// The component is fully accessible and properly announces placeholder content
-/// to VoiceOver users. When empty, the placeholder text serves as the accessibility
-/// value to provide context about expected input.
 @IBDesignable
 open class PlaceholderUITextView: UITextView {
     // MARK: - Public Properties
@@ -437,3 +419,5 @@ private extension PlaceholderUITextView {
         updatePlaceholderVisibility()
     }
 }
+
+// swiftlint:enable valid_ibinspectable

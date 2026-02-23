@@ -42,7 +42,11 @@ final class PlaceholderUITextViewTests: XCTestCase {
         XCTAssertNotNil(textView, "PlaceholderUITextView should initialize successfully")
         XCTAssertTrue(textView.isEditable, "Text view should be editable by default")
         XCTAssertTrue(textView.isSelectable, "Text view should be selectable by default")
-        XCTAssertEqual(textView.becomeFirstResponderAnimationDuration, 0.25, "Default animation duration should be 0.25")
+        XCTAssertEqual(
+            textView.becomeFirstResponderAnimationDuration,
+            0.25,
+            "Default animation duration should be 0.25"
+        )
         XCTAssertEqual(textView.resignFirstResponderAnimationDuration, 0.25, "Default animation duration should be 0.25")
     }
     
@@ -267,8 +271,16 @@ final class PlaceholderUITextViewTests: XCTestCase {
         textView.becomeFirstResponderAnimationDuration = becomeAnimationDuration
         textView.resignFirstResponderAnimationDuration = resignAnimationDuration
         
-        XCTAssertEqual(textView.becomeFirstResponderAnimationDuration, becomeAnimationDuration, "Become animation duration should be settable")
-        XCTAssertEqual(textView.resignFirstResponderAnimationDuration, resignAnimationDuration, "Resign animation duration should be settable")
+        XCTAssertEqual(
+            textView.becomeFirstResponderAnimationDuration,
+            becomeAnimationDuration,
+            "Become animation duration should be settable"
+        )
+        XCTAssertEqual(
+            textView.resignFirstResponderAnimationDuration,
+            resignAnimationDuration,
+            "Resign animation duration should be settable"
+        )
     }
     
     // MARK: - Performance Tests

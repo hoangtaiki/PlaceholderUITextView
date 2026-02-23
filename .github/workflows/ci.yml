@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [master, main, develop]
 
-env:
-  DEVELOPER_DIR: /Applications/Xcode_14.3.1.app/Contents/Developer
-
 jobs:
   swiftlint:
     name: SwiftLint
@@ -24,7 +21,7 @@ jobs:
 
   test-ios:
     name: Test iOS
-    runs-on: macos-13
+    runs-on: macos-14
     strategy:
       matrix:
         destination:
@@ -61,7 +58,7 @@ jobs:
 
   test-spm:
     name: Test Swift Package Manager
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -74,7 +71,7 @@ jobs:
 
   test-cocoapods:
     name: Test CocoaPods Integration
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -93,7 +90,7 @@ jobs:
 
   example-project:
     name: Build Example Project
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -126,7 +123,7 @@ jobs:
 
   documentation:
     name: Documentation
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - name: Checkout
         uses: actions/checkout@v4
