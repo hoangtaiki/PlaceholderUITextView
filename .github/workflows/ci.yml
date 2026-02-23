@@ -121,7 +121,7 @@ jobs:
           xcodebuild clean build \
             -project 'iOS Example.xcodeproj' \
             -scheme 'iOS Example' \
-            -destination 'platform=iOS Simulator,name=iPhone 15' \
+            -destination 'platform=iOS Simulator' \
             -derivedDataPath ~/Library/Developer/Xcode/DerivedData \
             CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
@@ -143,14 +143,23 @@ jobs:
           xcodebuild docbuild \
             -scheme PlaceholderUITextView \
             -destination 'generic/platform=iOS' \
-            -derivedDataPath ~/Library/Developer/Xcode/DerivedData
+            -derivedDataPath ./docs_output
 
-      - name: Sanitize documentation filenames
-        run: find ./data/documentation -name '*:*' -exec bash -c 'mv "$0" "${0//:/_}"' {} \;
+      - name: Find the generated .doccarchive path
+        id: find_doccarchive
+        run: |
+          # Find the actual path to the doccarchive within the derived data
+          DOC_ARCHIVE_PATH=$(find ./docs_output -name "*.doccarchive" | head -n 1)
+          echo "DOCC_ARCHIVE_PATH=$DOC_ARCHIVE_PATH" >> $GITHUB_OUTPUT
 
-      - name: Upload Documentation
-        uses: actions/upload-artifact@v4
+      - name: Transform DocC Archive for static hosting (optional, for GitHub Pages)
+        run: |
+          # Use the docc command to convert the archive to a format suitable for web hosting
+          xcrun docc convert "${{ steps.find_doccarchive.outputs.DOCC_ARCHIVE_PATH }}" \
+            --output-path ./html_docs \
+            --hosting-base-path YOUR_REPOSITORY_NAME # Set this to your repo name for GitHub Pages
+
+      - name: Upload documentation as an artifact
+        uses: actions/upload-pages-artifact@v4
         with:
-          name: documentation
-          path: ./data/documentation
-          if-no-files-found: warn
+          path: ./html_docs
