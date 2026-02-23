@@ -1,109 +1,70 @@
 # PlaceholderUITextView
 
-[![Platform](http://img.shields.io/badge/platform-ios-blue.svg?style=flat
-)](https://developer.apple.com/iphone/index.action)
-[![Language](http://img.shields.io/badge/language-swift-brightgreen.svg?style=flat
-)](https://developer.apple.com/swift)
-[![CI Status](https://img.shields.io/travis/hoangtaiki/PlaceholderUITextView.svg?style=flat)](https://travis-ci.org/hoangtaiki/PlaceholderUITextView)
+[![Platform](https://img.shields.io/badge/platform-ios-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)
+[![Language](https://img.shields.io/badge/language-swift-brightgreen.svg?style=flat)](https://developer.apple.com/swift)
+[![Swift Version](https://img.shields.io/badge/swift-5.0+-orange.svg?style=flat)](https://swift.org)
+[![iOS Version](https://img.shields.io/badge/iOS-16.0+-blue.svg?style=flat)](https://developer.apple.com/ios/)
+[![CI Status](https://github.com/hoangtaiki/PlaceholderUITextView/workflows/CI/badge.svg)](https://github.com/hoangtaiki/PlaceholderUITextView/actions)
 [![Version](https://img.shields.io/cocoapods/v/PlaceholderUITextView.svg?style=flat)](https://cocoapods.org/pods/PlaceholderUITextView)
-[![License](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat
-)](http://mit-license.org)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](http://mit-license.org)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![SPM compatible](https://img.shields.io/badge/SPM-compatible-brightgreen.svg?style=flat)](https://swift.org/package-manager/)
 
+A drop-in replacement for `UITextView` with native placeholder support and accessibility features.
 
-`PlaceholderUITextView` is a simple subclass from UITextView with multiple line placeholder
+![PlaceholderUITextView Demo](https://raw.githubusercontent.com/hoangtaiki/PlaceholderUITextView/master/Images/demo.gif)
 
-## Requirements
-- Xcode 10 or later
-- iOS 10.0 or later
-- Swift 4.2 or later
+## ✨ Features
 
-## Getting Started
+- 🎯 Native placeholder support like UITextField
+- 🎨 Rich text placeholders with NSAttributedString
+- ♿ Full accessibility and VoiceOver support
+- 🎭 Smooth animations and modern Swift API
+- 📱 iOS 15+ with Interface Builder support
+
+## 🚀 Quick Start
+
+```swift
+import PlaceholderUITextView
+
+let textView = PlaceholderUITextView()
+textView.placeholder = "What's on your mind?"
+textView.placeholderTextColor = .systemGray
+```
+
+## 📦 Installation
+
+### Swift Package Manager
+```swift
+dependencies: [
+    .package(url: "https://github.com/hoangtaiki/PlaceholderUITextView.git", from: "2.0.0")
+]
+```
 
 ### CocoaPods
-
-Install with [CocoaPods](http://cocoapods.org) by adding the following to your `Podfile`:
-
-```
-platform :ios, '10.0'
-use_frameworks!
-pod 'PlaceholderUITextView'
+```ruby
+pod 'PlaceholderUITextView', '~> 2.0'
 ```
 
 ### Carthage
-
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
-
-You can install Carthage with [Homebrew](https://brew.sh/) using the following command:
-
-```bash
-$ brew update
-$ brew install carthage
-```
-
-To integrate PlaceholderUITextView into your Xcode project using Carthage, specify it in your `Cartfile`:
-
 ```ogdl
-github "hoangtaiki/PlaceholderUITextView" ~> 1.2
+github "hoangtaiki/PlaceholderUITextView" ~> 2.0
 ```
 
-Run `carthage update` to build the framework and drag the built `PlaceholderUITextView.framework` into your Xcode project.
+## 📚 Documentation
 
+- **[Complete Documentation](DOCUMENTATION.md)** - Advanced configuration, examples, and customization
+- **[Contributing Guide](CONTRIBUTING.md)** - Development setup and contribution guidelines
+- **[Best Practices Summary](BEST_PRACTICES_SUMMARY.md)** - Implementation details and improvements
 
-### Swift Package Manager
+## 📄 License
 
-Install with [Swift Package Manager](https://github.com/apple/swift-package-manager) by adding the following to your `Package.swift`:
+MIT License. See [LICENSE](LICENSE) for details.
 
-```swift
-dependencies: [
-    package(url: "https://github.com/sabarics/PlaceholderUITextView.git", .branch("master")),
-],
-```
+## 🙏 Author
 
-### Submodules
+**Hoangtaiki** - [duchoang.vp@gmail.com](mailto:duchoang.vp@gmail.com)
 
-Or manually checkout the submodule with `git submodule add git@github.com:hoangtaiki/PlaceholderUITextView.git`, drag PlaceholderUITextView.xcodeproj to your project, and add PlaceholderUITextView as a build dependency.
+---
 
-
-## Usage
-
-You can set the value of the `placeholder` property just like using UITextField.
-
-### Interface Builder
-
-1. Drag a UITextView object onto the canvas.
-2. In the Identity inspector, set the Custom Class name to `PlaceholderUITextView`.
-3. In the Attributes inspector, you can change the value of the `placeholder` property directly.
-
-### Code
-
-```swift
-let placeholderTextView = PlaceholderUITextView(frame: view.bounds)
-placeholderTextView.placeholder = "What's on your mind?"
-view.addSubview(placeholderTextView)
-```
-
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Some notes
-If you run Example project you can see UITextView have some gap from four edges (top, right, bottom, left).
-This gap is not a feature of PlaceholderUITextView. It is the default features of UITextView.
-They are: `textContainerInset` and `lineFragmentPadding`.
-![UITextView](https://raw.githubusercontent.com/hoangtaiki/PlaceholderUITextView/master/Images/uitextview-structure.png)
-
-Defaut UITextView has `textContainerInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)` and `lineFragmentPadding = 5`. So that if you run Example Project you can see that: UITextField always  be moved a bit by these two default values. 
-To avoid this happening you have two ways:
-- Set `textContainerInset by .zero` and `lineFragmentPadding by 0`
-- Change constraint between UITextView and superview.
-
-## Author
-
-Hoangtaiki, duchoang.vp@gmail.com
-
-## Contributing
-
-We’re glad you’re interested in Refreshable, and we’d love to see where you take it. If you have suggestions or bug reports, feel free to send pull request or create new issue.
-
-Thanks, and please *do* take it for a joyride!
+**Questions?** Open an [issue](https://github.com/hoangtaiki/PlaceholderUITextView/issues) or check our [documentation](DOCUMENTATION.md)!

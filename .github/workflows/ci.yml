@@ -1,0 +1,167 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main, develop]
+  pull_request:
+    branches: [master, main, develop]
+
+jobs:
+  swiftlint:
+    name: SwiftLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: SwiftLint
+        uses: norio-nomura/action-swiftlint@3.2.1
+        with:
+          args: --strict
+
+  test-ios:
+    name: Test iOS
+    runs-on: macos-14
+    strategy:
+      matrix:
+        destination:
+          - "platform=iOS Simulator,OS=18.2,name=iPhone 16"
+          - "platform=iOS Simulator,OS=17.5,name=iPhone 15"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache derived data
+        uses: actions/cache@v4
+        with:
+          path: ~/Library/Developer/Xcode/DerivedData
+          key: ${{ runner.os }}-derived-data-${{ hashFiles('**/*.xcodeproj') }}
+          restore-keys: |
+            ${{ runner.os }}-derived-data-
+
+      - name: Build and Test
+        run: |
+          xcodebuild clean test \
+            -scheme PlaceholderUITextView \
+            -destination '${{ matrix.destination }}' \
+            -derivedDataPath ~/Library/Developer/Xcode/DerivedData \
+            -enableCodeCoverage YES \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+      - name: Upload coverage to Codecov
+        if: success()
+        uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: false
+
+  test-spm:
+    name: Test Swift Package Manager
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "16"
+
+      - name: Swift Package Manager Build
+        run: |
+          # SPM doesn't support UIKit on macOS, so we'll validate the package structure instead
+          swift package describe --type json > /dev/null
+          echo "✅ Package.swift is valid"
+
+      - name: Swift Package Manager Test
+        run: |
+          # Since tests likely depend on UIKit, we'll use xcodebuild for iOS Simulator
+          xcodebuild test \
+            -scheme PlaceholderUITextView \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+  test-cocoapods:
+    name: Test CocoaPods Integration
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Install CocoaPods
+        run: gem install cocoapods
+
+      - name: Pod lib lint
+        run: pod lib lint --swift-version=5.0 --allow-warnings
+
+  example-project:
+    name: Build Example Project
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache derived data
+        uses: actions/cache@v4
+        with:
+          path: ~/Library/Developer/Xcode/DerivedData
+          key: ${{ runner.os }}-example-derived-data-${{ hashFiles('Example/**/*.xcodeproj') }}
+          restore-keys: |
+            ${{ runner.os }}-example-derived-data-
+
+      - name: Build Example
+        working-directory: ./Example
+        run: |
+          xcodebuild clean build \
+            -project 'iOS Example.xcodeproj' \
+            -scheme 'iOS Example' \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -derivedDataPath ~/Library/Developer/Xcode/DerivedData \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+  documentation:
+    name: Documentation
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "16"
+
+      - name: Generate Documentation
+        run: |
+          xcodebuild docbuild \
+            -scheme PlaceholderUITextView \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath ./docs_output
+
+      - name: Find the generated .doccarchive path
+        id: find_doccarchive
+        run: |
+          DOC_ARCHIVE_PATH=$(find ./docs_output -name "*.doccarchive" | head -n 1)
+          if [ -z "$DOC_ARCHIVE_PATH" ]; then
+            echo "No .doccarchive found!" >&2
+            exit 1
+          fi
+          echo "doccarchive_path=$DOC_ARCHIVE_PATH" >> $GITHUB_OUTPUT
+
+      - name: Convert DocC Archive for Web Hosting
+        run: |
+          xcrun docc convert "${{ steps.find_doccarchive.outputs.doccarchive_path }}" \
+            --output-path ./html_docs \
+            --hosting-base-path /PlaceholderUITextView \
+            --allow-arbitrary-catalog-directories
+
+      - name: Upload documentation as an artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./html_docs
