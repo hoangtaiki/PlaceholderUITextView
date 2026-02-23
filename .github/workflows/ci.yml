@@ -139,7 +139,6 @@ jobs:
 
       - name: Generate Documentation
         run: |
-          # Use xcodebuild to generate documentation for iOS framework
           xcodebuild docbuild \
             -scheme PlaceholderUITextView \
             -destination 'generic/platform=iOS' \
@@ -148,16 +147,18 @@ jobs:
       - name: Find the generated .doccarchive path
         id: find_doccarchive
         run: |
-          # Find the actual path to the doccarchive within the derived data
           DOC_ARCHIVE_PATH=$(find ./docs_output -name "*.doccarchive" | head -n 1)
-          echo "DOCC_ARCHIVE_PATH=$DOC_ARCHIVE_PATH" >> $GITHUB_OUTPUT
+          if [ -z "$DOC_ARCHIVE_PATH" ]; then
+            echo "No .doccarchive found!" >&2
+            exit 1
+          fi
+          echo "doccarchive_path=$DOC_ARCHIVE_PATH" >> $GITHUB_OUTPUT
 
       - name: Convert DocC Archive for Web Hosting
         run: |
-          # Use the docc command to convert the archive to a format suitable for web hosting
-          xcrun docc convert "${{ steps.find_doccarchive.outputs.DOCC_ARCHIVE_PATH }}" \
+          xcrun docc convert "${{ steps.find_doccarchive.outputs.doccarchive_path }}" \
             --output-path ./html_docs \
-            --hosting-base-path YOUR_REPOSITORY_NAME # Set this to your repo name for GitHub Pages \
+            --hosting-base-path /PlaceholderUITextView \
             --allow-arbitrary-catalog-directories
 
       - name: Upload documentation as an artifact
