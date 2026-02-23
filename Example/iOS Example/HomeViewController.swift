@@ -10,9 +10,8 @@ import UIKit
 import PlaceholderUITextView
 
 class HomeViewController: UITableViewController {
-    
-    @IBOutlet weak var attributedPlaceholderTextView: PlaceholderUITextView!
-    @IBOutlet weak var noneInsetsLinePaddingTextView: PlaceholderUITextView!
+    @IBOutlet var attributedPlaceholderTextView: PlaceholderUITextView!
+    @IBOutlet var noneInsetsLinePaddingTextView: PlaceholderUITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

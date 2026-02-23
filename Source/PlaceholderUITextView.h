@@ -15,5 +15,3 @@ FOUNDATION_EXPORT double PlaceholderUITextViewVersionNumber;
 FOUNDATION_EXPORT const unsigned char PlaceholderUITextViewVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <PlaceholderUITextView/PublicHeader.h>
-
-

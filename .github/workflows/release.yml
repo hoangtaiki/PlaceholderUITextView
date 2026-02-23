@@ -1,0 +1,157 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*"
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_14.3.1.app/Contents/Developer
+
+jobs:
+  validate:
+    name: Validate Release
+    runs-on: macos-13
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate tag format
+        run: |
+          if [[ ! "${GITHUB_REF#refs/tags/}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Tag format is invalid. Expected format: X.Y.Z"
+            exit 1
+          fi
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+          bundler-cache: true
+
+      - name: Install CocoaPods
+        run: gem install cocoapods
+
+      - name: Pod spec lint
+        run: pod spec lint PlaceholderUITextView.podspec --swift-version=5.0
+
+  release:
+    name: Create Release
+    needs: validate
+    runs-on: macos-13
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+          bundler-cache: true
+
+      - name: Install CocoaPods
+        run: gem install cocoapods
+
+      - name: Build Framework
+        run: |
+          xcodebuild archive \
+            -scheme PlaceholderUITextView \
+            -destination 'generic/platform=iOS' \
+            -archivePath PlaceholderUITextView.xcarchive \
+            SKIP_INSTALL=NO \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+      - name: Create XCFramework
+        run: |
+          xcodebuild -create-xcframework \
+            -framework PlaceholderUITextView.xcarchive/Products/Library/Frameworks/PlaceholderUITextView.framework \
+            -output PlaceholderUITextView.xcframework
+
+      - name: Zip XCFramework
+        run: zip -r PlaceholderUITextView.xcframework.zip PlaceholderUITextView.xcframework
+
+      - name: Generate Changelog
+        id: changelog
+        run: |
+          git fetch --tags
+          PREVIOUS_TAG=$(git tag --sort=-version:refname | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | head -2 | tail -1)
+          CURRENT_TAG=${GITHUB_REF#refs/tags/}
+
+          if [ -n "$PREVIOUS_TAG" ]; then
+            CHANGELOG=$(git log --pretty=format:"- %s" ${PREVIOUS_TAG}..${CURRENT_TAG})
+          else
+            CHANGELOG=$(git log --pretty=format:"- %s")
+          fi
+
+          # Save multiline output
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            ## Changes
+            ${{ steps.changelog.outputs.changelog }}
+
+            ## Installation
+
+            ### Swift Package Manager
+            ```swift
+            dependencies: [
+                .package(url: "https://github.com/hoangtaiki/PlaceholderUITextView.git", from: "${{ github.ref_name }}")
+            ]
+            ```
+
+            ### CocoaPods
+            ```ruby
+            pod 'PlaceholderUITextView', '~> ${{ github.ref_name }}'
+            ```
+
+            ### Carthage
+            ```
+            github "hoangtaiki/PlaceholderUITextView" ~> ${{ github.ref_name }}
+            ```
+          draft: false
+          prerelease: false
+
+      - name: Upload XCFramework
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./PlaceholderUITextView.xcframework.zip
+          asset_name: PlaceholderUITextView.xcframework.zip
+          asset_content_type: application/zip
+
+  publish-cocoapods:
+    name: Publish to CocoaPods
+    needs: [validate, release]
+    runs-on: macos-13
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+          bundler-cache: true
+
+      - name: Install CocoaPods
+        run: gem install cocoapods
+
+      - name: Deploy to CocoaPods
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+        run: |
+          pod trunk push PlaceholderUITextView.podspec --swift-version=5.0
