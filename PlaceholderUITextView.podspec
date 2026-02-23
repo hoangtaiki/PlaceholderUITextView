@@ -15,7 +15,6 @@ Pod::Spec.new do |s|
                        DESC
 
   s.homepage         = 'https://github.com/hoangtaiki/PlaceholderUITextView'
-  s.screenshots      = ['https://raw.githubusercontent.com/hoangtaiki/PlaceholderUITextView/master/Images/demo.gif']
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Hoangtaiki' => 'duchoang.vp@gmail.com' }
   s.source           = { :git => 'https://github.com/hoangtaiki/PlaceholderUITextView.git', :tag => s.version.to_s }
