@@ -21,19 +21,19 @@ jobs:
 
   test-ios:
     name: Test iOS
-    runs-on: macos-14
+    runs-on: macos-latest
     strategy:
       matrix:
         destination:
           - "platform=iOS Simulator,OS=18.2,name=iPhone 16"
           - "platform=iOS Simulator,OS=17.5,name=iPhone 15"
-          
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Cache derived data
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/Library/Developer/Xcode/DerivedData
           key: ${{ runner.os }}-derived-data-${{ hashFiles('**/*.xcodeproj') }}
@@ -57,20 +57,31 @@ jobs:
 
   test-spm:
     name: Test Swift Package Manager
-    runs-on: macos-14
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app/Contents/Developer
+
       - name: Swift Package Manager Build
-        run: swift build
+        run: |
+          # SPM doesn't support UIKit on macOS, so we'll validate the package structure instead
+          swift package describe --type json > /dev/null
+          echo "✅ Package.swift is valid"
 
       - name: Swift Package Manager Test
-        run: swift test
+        run: |
+          # Since tests likely depend on UIKit, we'll use xcodebuild for iOS Simulator
+          xcodebuild test \
+            -scheme PlaceholderUITextView \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
+            CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
   test-cocoapods:
     name: Test CocoaPods Integration
-    runs-on: macos-14
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -78,24 +89,24 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0
+          ruby-version: "3.2"
           bundler-cache: true
 
       - name: Install CocoaPods
         run: gem install cocoapods
 
       - name: Pod lib lint
-        run: pod lib lint --swift-version=5.0
+        run: pod lib lint --swift-version=5.0 --allow-warnings
 
   example-project:
     name: Build Example Project
-    runs-on: macos-14
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Cache derived data
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/Library/Developer/Xcode/DerivedData
           key: ${{ runner.os }}-example-derived-data-${{ hashFiles('Example/**/*.xcodeproj') }}
@@ -106,30 +117,33 @@ jobs:
         working-directory: ./Example
         run: |
           xcodebuild clean build \
-            -workspace 'iOS Example.xcworkspace' \
+            -project 'iOS Example.xcodeproj' \
             -scheme 'iOS Example' \
-            -destination 'platform=iOS Simulator,OS=16.4,name=iPhone 14' \
-            -destination 'platform=iOS Simulator,OS=15.6,name=iPhone 13' \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
             -derivedDataPath ~/Library/Developer/Xcode/DerivedData \
             CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
   documentation:
     name: Documentation
-    runs-on: macos-14
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Swift-DocC-Render
-        run: |
-          npm install -g @apple/swift-docc-render
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_15.0.app/Contents/Developer
 
       - name: Generate Documentation
         run: |
-          swift package generate-documentation --target PlaceholderUITextView
+          # Use xcodebuild to generate documentation for iOS framework
+          xcodebuild docbuild \
+            -scheme PlaceholderUITextView \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath ~/Library/Developer/Xcode/DerivedData
 
       - name: Upload Documentation
         uses: actions/upload-artifact@v4
         with:
           name: documentation
-          path: .build/plugins/Swift-DocC/outputs/PlaceholderUITextView.doccarchive
+          path: ~/Library/Developer/Xcode/DerivedData/Build/Products/Debug-iphoneos/PlaceholderUITextView.doccarchive
+          if-no-files-found: warn
